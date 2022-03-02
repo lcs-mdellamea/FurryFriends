@@ -15,6 +15,9 @@ struct CatsOrDogsView: View {
         
         VStack {
             
+            Divider()
+                .padding()
+            
             Text("Would you like to see cats or dogs?")
                 .underline()
                 .font(.title2)
@@ -74,26 +77,25 @@ struct CatsOrDogsView: View {
                 //                    }
                 //                })
                 //                    .buttonStyle(.bordered)
+                
+                NavigationLink(destination: CatView(), label: {
                     
-                    NavigationLink(destination: CatView(), label: {
-                        
-                        Text("Dogs")
-                            .font(.title2)
-                            .background(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .foregroundColor(Color(red: 211 / 255,
-                                                           green: 211 / 255,
-                                                           blue: 211 / 255)))
-                        
-                    })
+                    Text("Dogs")
+                        .font(.title2)
+                        .background(
+                            RoundedRectangle(cornerRadius: 5)
+                                .foregroundColor(Color(red: 211 / 255,
+                                                       green: 211 / 255,
+                                                       blue: 211 / 255)))
+                    
+                })
                 
             }
             
             Spacer()
-            Spacer()
         }
         
-        .navigationTitle("")
+        .navigationTitle("FurryFriends")
         
     }
 }
