@@ -11,8 +11,10 @@
 		0C1CE64B27D0026D00028E54 /* CatPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1CE64A27D0026D00028E54 /* CatPicture.swift */; };
 		0C1CE64D27D0027C00028E54 /* DogPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1CE64C27D0027C00028E54 /* DogPicture.swift */; };
 		0C1CE65427D00D7300028E54 /* CatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1CE65327D00D7300028E54 /* CatView.swift */; };
+		0C1CE65727D02AF200028E54 /* SavedCats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1CE65627D02AF200028E54 /* SavedCats.swift */; };
+		0C1CE65927D02AFE00028E54 /* SavedDogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1CE65827D02AFE00028E54 /* SavedDogs.swift */; };
 		8134B14527CA4862004DEB85 /* FurryFriendsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8134B14427CA4862004DEB85 /* FurryFriendsApp.swift */; };
-		8134B14727CA4862004DEB85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8134B14627CA4862004DEB85 /* ContentView.swift */; };
+		8134B14727CA4862004DEB85 /* DogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8134B14627CA4862004DEB85 /* DogView.swift */; };
 		8134B14927CA4863004DEB85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8134B14827CA4863004DEB85 /* Assets.xcassets */; };
 		8134B14C27CA4863004DEB85 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8134B14B27CA4863004DEB85 /* Preview Assets.xcassets */; };
 		8134B15427CA55F4004DEB85 /* RemoteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8134B15327CA55F4004DEB85 /* RemoteImageView.swift */; };
@@ -24,9 +26,11 @@
 		0C1CE64A27D0026D00028E54 /* CatPicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatPicture.swift; sourceTree = "<group>"; };
 		0C1CE64C27D0027C00028E54 /* DogPicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogPicture.swift; sourceTree = "<group>"; };
 		0C1CE65327D00D7300028E54 /* CatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatView.swift; sourceTree = "<group>"; };
+		0C1CE65627D02AF200028E54 /* SavedCats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCats.swift; sourceTree = "<group>"; };
+		0C1CE65827D02AFE00028E54 /* SavedDogs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedDogs.swift; sourceTree = "<group>"; };
 		8134B14127CA4862004DEB85 /* FurryFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FurryFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8134B14427CA4862004DEB85 /* FurryFriendsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurryFriendsApp.swift; sourceTree = "<group>"; };
-		8134B14627CA4862004DEB85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8134B14627CA4862004DEB85 /* DogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogView.swift; sourceTree = "<group>"; };
 		8134B14827CA4863004DEB85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8134B14B27CA4863004DEB85 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8134B15327CA55F4004DEB85 /* RemoteImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageView.swift; sourceTree = "<group>"; };
@@ -51,6 +55,15 @@
 				0C1CE64C27D0027C00028E54 /* DogPicture.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		0C1CE65527D02AC400028E54 /* SavedPictures */ = {
+			isa = PBXGroup;
+			children = (
+				0C1CE65627D02AF200028E54 /* SavedCats.swift */,
+				0C1CE65827D02AFE00028E54 /* SavedDogs.swift */,
+			);
+			path = SavedPictures;
 			sourceTree = "<group>";
 		};
 		8134B13827CA4862004DEB85 = {
@@ -96,7 +109,8 @@
 			children = (
 				0C1CE65327D00D7300028E54 /* CatView.swift */,
 				0C1CE64727CFFC5400028E54 /* CatsOrDogsView.swift */,
-				8134B14627CA4862004DEB85 /* ContentView.swift */,
+				8134B14627CA4862004DEB85 /* DogView.swift */,
+				0C1CE65527D02AC400028E54 /* SavedPictures */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -180,7 +194,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8134B14727CA4862004DEB85 /* ContentView.swift in Sources */,
+				0C1CE65927D02AFE00028E54 /* SavedDogs.swift in Sources */,
+				0C1CE65727D02AF200028E54 /* SavedCats.swift in Sources */,
+				8134B14727CA4862004DEB85 /* DogView.swift in Sources */,
 				8134B15427CA55F4004DEB85 /* RemoteImageView.swift in Sources */,
 				0C1CE65427D00D7300028E54 /* CatView.swift in Sources */,
 				0C1CE64B27D0026D00028E54 /* CatPicture.swift in Sources */,

@@ -9,39 +9,46 @@ import SwiftUI
 
 struct CatsOrDogsView: View {
     
-    @State var currentImage = URL(string: "https://www.russellgordon.ca/lcs/miscellaneous/transparent-pixel.png")!
+    //MARK: Stored Properties:
+    
+    @State var firstImage = URL(string: "https://www.russellgordon.ca/lcs/miscellaneous/transparent-pixel.png")!
+    
+    @State var secondImage = URL(string: "https://www.russellgordon.ca/lcs/miscellaneous/transparent-pixel.png")!
     
     var body: some View {
         
-        VStack {
+        VStack(alignment:.center, spacing: 15) {
             
             Divider()
-                .padding()
+            .padding()
+            
+            Spacer()
             
             Text("Would you like to see cats or dogs?")
                 .underline()
                 .font(.title2)
             
             Text("(This can be changed later.)")
-            
-            
-            Spacer()
+                .font(.title2)
+                .padding()
             
             HStack {
                 
-                RemoteImageView(fromURL: currentImage)
+                RemoteImageView(fromURL: firstImage)
+                    .border(.black, width: 2)
                     .padding()
                 
-                RemoteImageView(fromURL: currentImage)
+                RemoteImageView(fromURL: secondImage)
+                    .border(.black, width: 2)
                     .padding()
                 
             }
-            
-            Spacer()
+            .padding()
             
             HStack(spacing: 15) {
                 
-                NavigationLink(destination: ContentView(), label: {
+                // Stylized navigationlink that leads to CatView.
+                NavigationLink(destination: CatView(), label: {
                     
                     Text("Cats")
                         .font(.title2)
@@ -78,7 +85,8 @@ struct CatsOrDogsView: View {
                 //                })
                 //                    .buttonStyle(.bordered)
                 
-                NavigationLink(destination: CatView(), label: {
+                // Stylized navigationlink that leads to ContentView.
+                NavigationLink(destination: DogView(), label: {
                     
                     Text("Dogs")
                         .font(.title2)
@@ -93,6 +101,25 @@ struct CatsOrDogsView: View {
             }
             
             Spacer()
+            
+            Divider()
+                .padding()
+            
+            Spacer()
+            
+        }
+        
+        .task {
+            
+            // Example images for each type of pet
+            let remoteCatImage = "https://purr.objects-us-east-1.dream.io/i/JJiYI.jpg"
+            let remoteDogImage = "https://images.dog.ceo/breeds/labrador/lab_young.JPG"
+            
+            // Replaces the transparent pixel image with an actual image of an animal
+            // Adjust according to your preference ☺️
+            firstImage = URL(string: remoteCatImage)!
+            secondImage = URL(string: remoteDogImage)!
+            
         }
         
         .navigationTitle("FurryFriends")
@@ -109,8 +136,3 @@ struct CatsOrDogsView_Previews: PreviewProvider {
         }
     }
 }
-
-
-
-// NavigationLink: property buttonstyle
-// .buttonStyle(ButtonStyle3D(background: Color.yellow))
