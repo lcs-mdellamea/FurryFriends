@@ -16,6 +16,8 @@ struct DogView: View {
     @State var currentImage = URL(string: "https://www.russellgordon.ca/lcs/miscellaneous/transparent-pixel.png")!
     
     // MARK: Computed properties
+    
+    
     var body: some View {
         
         VStack {
@@ -29,7 +31,7 @@ struct DogView: View {
                 .padding()
             
             HStack {
-                
+            
                 Image(systemName: "heart.circle")
                     .resizable()
                     .frame(width: 30, height: 30)
@@ -39,7 +41,7 @@ struct DogView: View {
                     .frame(width: 30, height: 30)
                 
             }
-            
+                
             Divider()
             
             HStack {
@@ -54,21 +56,15 @@ struct DogView: View {
             
             Divider()
             
-            List {
-                
-                NavigationLink(destination: SavedDogs()) {
-                    Text("Dogs")
-                }
-                
-                NavigationLink(destination: SavedCats()) {
-                    Text("Cats")
-                }
-                
-            }
+//            List {
+//
+//                NavigationLink(destination: SavedDogs()) {
+//                    Text("Dogs")
+//                }
+//
+//            }
+            
             .padding()
-            
-            
-            
             
             // Push main image to top of screen
             Spacer()
@@ -78,7 +74,7 @@ struct DogView: View {
         .task {
             
             // Example images for each type of pet
-            let remoteCatImage = "https://purr.objects-us-east-1.dream.io/i/JJiYI.jpg"
+       //     let remoteCatImage = "https://purr.objects-us-east-1.dream.io/i/JJiYI.jpg"
             let remoteDogImage = "https://images.dog.ceo/breeds/labrador/lab_young.JPG"
             
             // Replaces the transparent pixel image with an actual image of an animal
@@ -97,7 +93,9 @@ struct DogView: View {
 struct DogView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
+            
             DogView()
+            
         }
     }
 }

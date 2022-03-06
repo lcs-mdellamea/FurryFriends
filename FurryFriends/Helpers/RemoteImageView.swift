@@ -16,6 +16,7 @@ struct RemoteImageView: View {
     var body: some View {
         
         // Retrieves and displays a remote image, showing a placeholder until the image has loaded
+        
         AsyncImage(url: fromURL,
                    content: { downloadedImage in
             downloadedImage
