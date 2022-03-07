@@ -10,6 +10,8 @@ import SwiftUI
 struct ScoreboardView: View {
     
     //MARK: Stored Properties
+    
+    // Re-introduce variable points
     @State var points: Points = Points(dogs: 0, cats: 0)
     
     //MARK: Computed Properties
@@ -18,10 +20,17 @@ struct ScoreboardView: View {
         
         VStack {
             
-            Text( points.cats > points.dogs ? "You are a cat person!":"You are a dog person!" )
-                .font(.title2)
+            // ternary condition operation
+            Text(points.cats > points.dogs ? "You are a cat person!":"You are a dog person!")
+                .font(.title)
+                .underline()
+                .foregroundColor(.pink)
+                .background(.black)
+            
         }
-        .navigationTitle("What type of person are you")
+        
+        .navigationTitle("What type of person are you?")
+        
     }
     //MARK: function
     func loadPoints() {

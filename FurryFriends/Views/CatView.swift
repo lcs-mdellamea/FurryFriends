@@ -16,15 +16,18 @@ struct CatView: View {
     // Address for main image
     // Starts as a transparent pixel – until an address for an animal's image is set
     
-    @State var currentImage: CatPicture = CatPicture(file: URL(string: "https://purr.objects-us-east-1.dream.io/i/timmy.jpg")!)
+    @State var currentImage: CatPicture = CatPicture(file: URL(string: "https://purr.objects-us-east-1.dream.io/i/imageimage.jpg")!)
     
     @State var favorites: [CatPicture] = []
+    
+    @State var points: Points = Points(dogs: 0, cats: 0)
     
     @State var currentCatAddedToFavorites = false
     
     // MARK: Computed properties
     
     var body: some View {
+        
         
         // Static interface
         
@@ -56,6 +59,8 @@ struct CatView: View {
                             // Record that we have marked this as a favorite
                             currentCatAddedToFavorites = true
                             
+                            points.cats += 5
+                            
                         }
                         
                     }
@@ -65,7 +70,9 @@ struct CatView: View {
                     .frame(width: 30, height: 30)
                     .onTapGesture {
                         
-                       syncDownloadNewCatImage()
+                        syncDownloadNewCatImage()
+                        
+                        points.cats += 1
                         
                     }
                 
@@ -85,9 +92,12 @@ struct CatView: View {
             
             Divider()
             
-            List(favorites, id: \.self) { currentFavorite in
-                Text(String(describing: currentFavorite.file))
-            
+            ScrollView {
+                
+                List(favorites, id: \.self) { currentFavorite in
+                    Text(currentFavorite.file.absoluteString)
+                    
+                }
             }
             
             // Push main image to top of screen
@@ -106,20 +116,22 @@ struct CatView: View {
             
             // Load favorites from the file saved on the device
             loadFavorites()
+            loadPoints()
             
         }
-            // React to changes of state for the app. (foreground, background, and inactive state.)
-            .onChange(of: scenePhase) { newPhase in
-                if newPhase == .inactive {
-                    print("Inactive")
-                } else if newPhase == .active {
-                    print("Active")
-                } else if newPhase == .background {
-                    print("Background")
-                    
-                    //Permanently save the list of favorites.
-                    persistFavorites()
-                }
+        // React to changes of state for the app. (foreground, background, and inactive state.)
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .inactive {
+                print("Inactive")
+            } else if newPhase == .active {
+                print("Active")
+            } else if newPhase == .background {
+                print("Background")
+                
+                //Permanently save the list of favorites.
+                persistFavorites()
+                persistPoints()
+            }
             
         }
         
@@ -145,16 +157,6 @@ struct CatView: View {
         // Start a session to interact (talk with) the endpoint
         let urlSession = URLSession.shared
         
-        
-        
-        // Example images for each type of pet
-        
-        //     let remoteCatImage = "https://purr.objects-us-east-1.dream.io/i/JJiYI.jpg"
-        
-        //  let remoteDogImage = "https://images.dog.ceo/breeds/labrador/lab_young.JPG"
-        
-        // Replaces the transparent pixel image with an actual image of an animal
-        // Adjust according to your preference ☺️
         // Try to fetch a new image
         // It might not work, so we use a do-catch block
         
@@ -250,9 +252,73 @@ struct CatView: View {
             print("Could not load the data from the stores JSON file.")
             print("=========")
             print(error.localizedDescription)
-        
+            
         }
     }
+    
+    func persistPoints() {
+        
+        // Get a location under which to save the data
+        let filename = getDocumentsDirectory().appendingPathComponent(pointsLabel)
+        print(filename)
+        
+        do {
+            // Create a JSON Encoder object
+            let encoder = JSONEncoder()
+            
+            // Configure the encoder to "pretty print" the JSON
+            encoder.outputFormatting = .prettyPrinted
+            
+            // Encode the list of favorites we've collected
+            let data = try encoder.encode(points)
+            
+            // Write the JSON to a file in the filename earlier
+            try data.write(to: filename, options: [.atomicWrite, .completeFileProtection])
+            
+            print("Saved data to the Documents directory successfully.")
+            print("=========")
+            print(String(data: data, encoding: .utf8)!)
+            
+        } catch {
+            
+            print("Unable to write list of favorites to the Documents directory")
+            print("=========")
+            print(error.localizedDescription)
+            
+        }
+    }
+    
+    // loads the datat that was saved to the device
+    // Loading our favorites:
+    func loadPoints() {
+        
+        // Get a location under which to save the data
+        let filename = getDocumentsDirectory().appendingPathComponent(pointsLabel)
+        print(filename)
+        
+        //Attempt to load the data
+        do {
+            // Load raw data
+            let data = try Data(contentsOf: filename)
+            
+            // Write the JSON to a file in the filename earlier
+            print("Loaded data from the Documents directory successfully.")
+            print("=========")
+            print(String(data: data, encoding: .utf8)!)
+            
+            // Decode the JSON into Swift native data structures
+            // NOTE: we used [DadJoke] since we are loading into a list (array)
+            points = try JSONDecoder().decode(Points.self, from: data)
+            
+        } catch {
+            // What went wrong
+            print("Could not load the data from the stores JSON file.")
+            print("=========")
+            print(error.localizedDescription)
+            
+        }
+    }
+    
 }
 
 struct CatView_Previews: PreviewProvider {

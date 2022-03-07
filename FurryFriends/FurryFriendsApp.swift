@@ -8,12 +8,23 @@
 import SwiftUI
 
 @main
+
 struct FurryFriendsApp: App {
+    
     var body: some Scene {
+        
         WindowGroup {
+            
             TabView {
                 
+                NavigationView {
+                    CatsOrDogsView()
+                }
+                
                 CatsOrDogsView()
+                    .tabItem {
+                        Image("HouseIcon")
+                    }
                 
                 DogView()
                     .tabItem {

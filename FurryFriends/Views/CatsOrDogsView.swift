@@ -28,7 +28,7 @@ struct CatsOrDogsView: View {
                 .underline()
                 .font(.title2)
             
-            Text("(This can be changed later.)")
+            Text("(Please click on the tab.)")
                 .font(.title2)
                 .padding()
             

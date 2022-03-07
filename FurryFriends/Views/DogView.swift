@@ -23,15 +23,13 @@ struct DogView: View {
     
     @State var points: Points = Points(dogs: 0, cats: 0)
     
-    @State var currentDogAddedToFavorites = false
+    @State var currentDogAddedToFavorites: Bool = false
     
     // MARK: Computed properties
     
     var body: some View {
         
-        
         // Static interface
-        
         VStack {
             
             Divider()
@@ -118,6 +116,7 @@ struct DogView: View {
             
             // Load favorites from the file saved on the device
             loadFavorites()
+            
             loadPoints()
             
         }
@@ -132,7 +131,9 @@ struct DogView: View {
                 
                 //Permanently save the list of favorites.
                 persistFavorites()
+                
                 persistPoints()
+                
             }
             
         }
@@ -159,19 +160,8 @@ struct DogView: View {
         // Start a session to interact (talk with) the endpoint
         let urlSession = URLSession.shared
         
-        
-        
-        // Example images for each type of pet
-        
-        //     let remoteCatImage = "https://purr.objects-us-east-1.dream.io/i/JJiYI.jpg"
-        
-        //  let remoteDogImage = "https://images.dog.ceo/breeds/labrador/lab_young.JPG"
-        
-        // Replaces the transparent pixel image with an actual image of an animal
-        // Adjust according to your preference ☺️
         // Try to fetch a new image
         // It might not work, so we use a do-catch block
-        
         do {
             
             // Get the raw data from the endpoint
@@ -194,6 +184,7 @@ struct DogView: View {
             print(error)
             
         }
+        
     }
     
     func syncDownloadNewDogImage() {
@@ -215,6 +206,7 @@ struct DogView: View {
         print(filename)
         
         do {
+            
             // Create a JSON Encoder object
             let encoder = JSONEncoder()
             
@@ -231,10 +223,12 @@ struct DogView: View {
             print(String(data: data, encoding: .utf8)!)
             
         } catch {
+            
             print("Unable to write list of favorites to the Documents directory")
             print("=========")
             print(error.localizedDescription)
         }
+        
     }
     
     // loads the datat that was saved to the device
@@ -256,7 +250,7 @@ struct DogView: View {
             print(String(data: data, encoding: .utf8)!)
             
             // Decode the JSON into Swift native data structures
-            // NOTE: we used [DadJoke] since we are loading into a list (array)
+            // NOTE: used [DogPicture] since I am loading into a list (array)
             favorites = try JSONDecoder().decode([DogPicture].self, from: data)
             
         } catch {
@@ -320,6 +314,7 @@ struct DogView: View {
             points = try JSONDecoder().decode(Points.self, from: data)
             
         } catch {
+            
             // What went wrong
             print("Could not load the data from the stores JSON file.")
             print("=========")
@@ -327,7 +322,6 @@ struct DogView: View {
             
         }
     }
-    
 }
 
 struct DogView_Previews: PreviewProvider {
