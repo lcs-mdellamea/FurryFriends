@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct CatPicture: Decodable {
-    let file: String
+struct CatPicture: Decodable, Hashable, Encodable {
+    let file: URL
 }

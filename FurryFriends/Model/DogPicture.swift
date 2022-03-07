@@ -12,7 +12,7 @@ import Foundation
 // Swift to be able to take a JSON object
 // and 'decode' into an instance of this
 // structure
-struct DogPicture: Decodable {
-    let message: String
+struct DogPicture: Decodable, Hashable, Encodable {
+    let message: URL
     let status: String
 }
